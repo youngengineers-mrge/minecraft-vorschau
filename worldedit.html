@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorldEdit</title>
+  <meta name="author" content="Andreas Sigismund">
+  <meta name="generator" content="ChatGPT, GitHub Copilot">
+  <meta name="publisher" content="Andreas Sigismund">
+  <meta name="project" content="AG Young Engineers">
+  <link rel="stylesheet" href="style.css">
+  <style>
+      .minecraft-mod-table th:first-child,
+      .minecraft-mod-table td:first-child {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="overview-title">WorldEdit in Minecraft</h1>
+  </header>
+  <main>
+    <section class="minecraft-intro">
+      <div>
+       <h2>Einführung</h2>
+       <p>WorldEdit ist ein mächtiger Bau- und Welteditor für Minecraft, der große Bereiche schnell und präzise verändern kann.<br> 
+        <p>Durch das Auslagern von Bereichen in Schematic-Dateien können Bauwerke und Strukturen gespeichert und wiederverwendet werden.</p>
+        <p>Für die Auswahl und Darstellung von Bereichen ergänzt WorldEditCUI die Arbeit mit einer klaren grafischen Anzeige der markierten Fläche.</p>
+      </div>
+      <a href="bilder/worldedit.png" target="_blank" rel="noopener" title="Bild in voller Größe öffnen">
+        <img class="topic-image hover-fullsize-image" src="bilder/worldedit.png" width="320"  alt="WorldEdit in Minecraft">
+      </a>
+    </section>
+    <section class="minecraft-intro">
+<div >
+      <p>Wir nutzen den <strong>WorldEdit</strong>-Mod in Verbindung mit dem <strong>WorldEditCUI</strong>-Mod in unserer Minecraft-Installation.<br>
+      Mit WorldEdit führen wir aufwendige Änderungen an der Welt aus. Typische Möglichkeiten sind:
+<br> - Bereiche mit <code>//pos1</code> und <code>//pos2</code> markieren
+<br> - Blöcke setzen oder ersetzen, z. B. <code>//set stone</code>
+<br> - Wände erzeugen mit <code>//walls</code>
+<br> - Bereiche kopieren, verschieben und drehen
+<br> - Konstruktionen als Schematic-Dateien speichern und wieder laden
+<br> - große Flächen schnell bearbeiten
+<br> - Formen wie Kugeln, Zylinder oder Hohlkörper erzeugen
+<br> - mit Brushes Gelände formen oder Blöcke „malen“
+<br> - Aktionen mit <code>//undo</code>  zurücknehmen
+<br> <br>
+WorldEditCUI ergänzt WorldEdit nur um die grafische Darstellung. <br>
+Du siehst damit direkt die beiden Auswahlpunkte und Größe und Lage der Auswahl<br>
+Schau dir die <a href="https://modrinth.com/mod/worldedit-cui/gallery?utm_source=chatgpt.com" target="_blank">WorldEditCUI Galerie</a> an.
+
+</p></div>
+     
+        <a href="bilder/haus-markiert.png" target="_blank" rel="noopener" title="Bild in voller Größe öffnen">
+        <img class="topic-image hover-fullsize-image" src="bilder/haus-markiert.png" width="250" height="141" alt="Haus in Minecraft markiert mit WorldEditCUI">
+        </a>
+    </section>
+ 
+    <section><ul>
+        <li>
+          <a href="/tools/md-viewer.html?file=/themen/minecraft/worldedit_installation_und_test.md&amp;title=worldedit-installation-und-test" aria-label="">
+          WorldEdit installieren und testen</a>
+          <p>In dieser Anleitung wird erklärt, wie man WorldEdit in Minecraft installiert und testet.</p>
+        </li>
+        <li>
+          <a href="/tools/md-viewer.html?file=/themen/minecraft/kleine_burg_minecraft_26_2_anleitung.md&amp;title=schematic-Datei einfügen" aria-label="UltimMC Zusammenfassung">
+          <strong>Schematic</strong>-Datei in eine Minecraft-Welt einfügen</a>
+          <p>Eine Schematic-Datei kann in Minecraft mit der Mod "WorldEdit" eingefügt werden.</p>
+          <p>Schematic-Datei haben die Endung <code>.schematic</code> oder <code>.schem</code>.</p>
+        </li>
+        </ul>
+    </section>
+    <section>
+      <h2>Schematic-Dateien</h2>
+      <p>Vorhandene Dateien zum Herunterladen:</p>
+      <ul id="schematic-downloads" aria-live="polite">
+        <li>Dateiliste wird geladen ...</li>
+      </ul>
+    </section>
+
+  </main>
+  <footer>
+    Erstellt mit Unterstützung von ChatGPT und GitHub Copilot ·
+    Fachliche Prüfung und Veröffentlichung: Andreas Sigismund<br>
+    AG Young Engineers · Martin-Rinckart-Gymnasium Eilenburg<br>
+    Letzte Änderung: <span id="lastModified">TT.MM.JJJJ, hh:mm Uhr</span>
+    <script>
+      (async function ladeSchematicDownloads() {
+        const liste = document.getElementById('schematic-downloads');
+        const apiUrl = 'https://api.github.com/repos/youngengineers-mrge/youngengineers-mrge.github.io/contents/themen/minecraft/schematic';
+        const downloadOrdner = './schematic/';
+
+        function zeigeDateien(dateinamen) {
+          liste.replaceChildren();
+
+          if (dateinamen.length === 0) {
+            const listenpunkt = document.createElement('li');
+            listenpunkt.textContent = 'Keine Dateien vorhanden.';
+            liste.appendChild(listenpunkt);
+            return;
+          }
+
+          dateinamen
+            .sort((a, b) => a.localeCompare(b, 'de', { numeric: true }))
+            .forEach((dateiname) => {
+              const listenpunkt = document.createElement('li');
+              const link = document.createElement('a');
+              link.href = downloadOrdner + encodeURIComponent(dateiname);
+              link.download = dateiname;
+              link.textContent = dateiname;
+              listenpunkt.appendChild(link);
+              liste.appendChild(listenpunkt);
+            });
+        }
+
+        async function ladeVonGithub() {
+          const antwort = await fetch(apiUrl, { headers: { Accept: 'application/vnd.github+json' } });
+          if (!antwort.ok) {
+            throw new Error('GitHub API antwortet mit Status ' + antwort.status);
+          }
+
+          const eintraege = await antwort.json();
+          return eintraege
+            .filter((eintrag) => eintrag.type === 'file')
+            .map((eintrag) => eintrag.name);
+        }
+
+        async function ladeAusLokalerVerzeichnisliste() {
+          const ordnerUrl = new URL(downloadOrdner, window.location.href);
+          const antwort = await fetch(ordnerUrl.href, { cache: 'no-store' });
+          if (!antwort.ok) {
+            throw new Error('Verzeichnis antwortet mit Status ' + antwort.status);
+          }
+
+          const dokument = new DOMParser().parseFromString(await antwort.text(), 'text/html');
+          return Array.from(dokument.querySelectorAll('a[href]'))
+            .map((link) => new URL(link.getAttribute('href'), ordnerUrl.href))
+            .filter((url) => url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1) === ordnerUrl.pathname)
+            .map((url) => decodeURIComponent(url.pathname.split('/').pop()))
+            .filter(Boolean);
+        }
+
+        const istGithubPages = window.location.hostname === 'youngengineers-mrge.github.io';
+
+        try {
+          const dateien = istGithubPages
+            ? await ladeVonGithub()
+            : await ladeAusLokalerVerzeichnisliste();
+          zeigeDateien(dateien);
+        } catch (primaerFehler) {
+          try {
+            const dateien = istGithubPages
+              ? await ladeAusLokalerVerzeichnisliste()
+              : await ladeVonGithub();
+            zeigeDateien(dateien);
+          } catch (verzeichnisFehler) {
+            const listenpunkt = document.createElement('li');
+            listenpunkt.textContent = 'Die Dateiliste konnte nicht geladen werden.';
+            liste.replaceChildren(listenpunkt);
+            console.warn('Schematic-Dateiliste konnte nicht geladen werden.', primaerFehler, verzeichnisFehler);
+          }
+        }
+      })();
+    </script>
+    <script src="script.js"></script>
+  </footer>
+</body>
+</html>
