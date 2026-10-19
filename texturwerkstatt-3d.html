@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minecraft – Texturwerkstatt mit 3D-Vorschau</title>
+<style>
+:root{font-family:system-ui,'Segoe UI',Arial,sans-serif;color:#192b36;background:#eef3f6}*{box-sizing:border-box}body{margin:0;padding:22px}main{max-width:1170px;margin:auto}h1{font-size:clamp(1.5rem,3vw,2.15rem);margin:0 0 6px}p{margin:5px 0 15px;color:#52636e}.layout{display:grid;grid-template-columns:minmax(320px,1fr) minmax(300px,0.85fr);gap:18px}.panel{background:white;border:1px solid #dce5ea;border-radius:16px;padding:19px;box-shadow:0 5px 20px #1a344208}.tabs,.toolbar,.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.tabs{margin-bottom:16px}button{border:1px solid #becbd3;border-radius:9px;padding:9px 12px;background:#fff;color:#223642;font:inherit;cursor:pointer}button:hover{background:#edf5f9}button.active{background:#12678c;border-color:#12678c;color:white}button:focus-visible,input:focus-visible{outline:3px solid #60b4db;outline-offset:2px}.editor-wrap{display:flex;justify-content:center;background:#dce5eb;border-radius:12px;padding:12px;margin:14px 0}#editor{width:min(100%,480px);aspect-ratio:1;display:block;image-rendering:pixelated;touch-action:none;cursor:crosshair;background:white;box-shadow:0 2px 9px #263f4836}label{display:inline-flex;align-items:center;gap:6px;font-size:.92rem}input[type=color]{width:43px;height:39px;border:0;background:transparent;cursor:pointer}input[type=text]{width:94px;border:1px solid #bccbd3;border-radius:8px;padding:9px;font:inherit}input[type=range]{width:150px}.swatch{width:28px;height:28px;border:1px solid #a0aab0;border-radius:5px;display:inline-block}.controls{display:grid;gap:12px}.subtitle{font-weight:700;margin-bottom:5px}.muted{color:#61717a;font-size:.87rem}.tools{margin:9px 0}.download{background:#147047;color:white;border-color:#147047}.download:hover{background:#0c5a38}.preview{background:linear-gradient(140deg,#d9e7f0,#f4f6fa);min-height:320px;display:grid;place-items:center;border-radius:14px;overflow:hidden;perspective:850px}.scene{width:180px;height:180px;position:relative;transform-style:preserve-3d;transform:rotateX(-25deg) rotateY(-35deg);transition:transform .15s}.face{position:absolute;width:180px;height:180px;backface-visibility:visible;border:1px solid #25394455;background:#aaa;image-rendering:pixelated}.face canvas{width:100%;height:100%;display:block;image-rendering:pixelated}.front{transform:translateZ(90px)}.right{transform:rotateY(90deg) translateZ(90px)}.top{transform:rotateX(90deg) translateZ(90px)}.back{transform:rotateY(180deg) translateZ(90px)}.left{transform:rotateY(-90deg) translateZ(90px)}.bottom{transform:rotateX(-90deg) translateZ(90px)}.note{padding:10px 13px;background:#edf5fa;border-radius:9px;color:#3e5a6c;font-size:.91rem}.hint{font-size:.9rem;color:#4e626e;line-height:1.5}.status{min-height:1.4em;color:#136546;font-weight:600;font-size:.9rem}.separator{border:0;border-top:1px solid #e1e8ed;margin:18px 0}@media(max-width:760px){body{padding:12px}.layout{grid-template-columns:1fr}.panel{padding:14px}.preview{min-height:290px}}@media(prefers-reduced-motion:reduce){.scene{transition:none}}
+</style>
+</head>
+<body><main>
+<h1>🧱 Minecraft – Texturwerkstatt</h1>
+<p>Zeichne drei <strong>16 × 16 Pixel</strong> große PNG-Texturen und betrachte sie sofort auf einem Würfel. Funktioniert vollständig offline.</p>
+<div class="layout">
+<section class="panel" aria-label="Texturen bearbeiten">
+<h2 style="margin-top:0;font-size:1.2rem">1. Textur zeichnen</h2>
+<div class="tabs" role="group" aria-label="Würfelseite wählen">
+<button class="active" data-side="front" aria-pressed="true">Vorne</button><button data-side="right" aria-pressed="false">Seitlich</button><button data-side="top" aria-pressed="false">Oben</button>
+</div>
+<div class="controls">
+<div class="row"><label for="color">Zeichenfarbe <input id="color" type="color" value="#904638"></label><label for="hex">Hex <input id="hex" type="text" maxlength="7" value="#904638" spellcheck="false"></label><span class="swatch" id="swatch" title="Ausgewählte Farbe"></span></div>
+<div class="row tools" role="group" aria-label="Zeichenwerkzeuge"><button class="active" data-tool="pen" aria-pressed="true">✏️ Stift</button><button data-tool="fill" aria-pressed="false">🪣 Füllen</button><button data-tool="erase" aria-pressed="false">◻ Radierer</button><button data-tool="pick" aria-pressed="false">🎯 Pipette</button></div>
+</div>
+<div class="editor-wrap"><canvas id="editor" width="480" height="480" aria-label="16 mal 16 Pixelraster: Mit der Maus oder dem Finger zeichnen"></canvas></div>
+<div class="row"><label><input id="grid" type="checkbox" checked> Raster anzeigen</label><button id="undo">↶ Rückgängig</button><button id="clear">Zeichenfläche löschen</button></div>
+<hr class="separator">
+<div class="subtitle">Streifenmuster für diese Seite</div>
+<div class="row"><button id="stripesV">Senkrechte Streifen</button><button id="stripesH">Waagerechte Streifen</button></div>
+<p class="hint">Die Streifen werden mit einer dunkleren Variante der Grundfarbe gezeichnet. Bereits vorhandene Pixel auf dieser Seite werden dabei ersetzt.</p>
+<hr class="separator">
+<div class="row"><button class="download" id="downloadOne">⬇ Diese Textur als PNG</button><button class="download" id="downloadAll">⬇ Alle 3 als ZIP</button></div>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+</section>
+<section class="panel" aria-label="3D Vorschau">
+<h2 style="margin-top:0;font-size:1.2rem">2. Würfelvorschau</h2>
+<div class="preview"><div class="scene" id="scene">
+<div class="face front"><canvas data-preview="front" width="16" height="16"></canvas></div>
+<div class="face right"><canvas data-preview="right" width="16" height="16"></canvas></div>
+<div class="face top"><canvas data-preview="top" width="16" height="16"></canvas></div>
+<div class="face back"><canvas data-preview="front" width="16" height="16"></canvas></div>
+<div class="face left"><canvas data-preview="right" width="16" height="16"></canvas></div>
+<div class="face bottom"><canvas data-preview="top" width="16" height="16"></canvas></div>
+</div></div>
+<p class="muted">Die Rückseite nutzt „Vorne“, die linke Seite „Seitlich“ und die Unterseite „Oben“. Im Spiel lassen sich diese Flächen später getrennt zuordnen.</p>
+<div class="row" style="margin:12px 0"><label for="rotate">Drehung <input type="range" id="rotate" min="-70" max="70" value="-35"></label><button id="resetRotation">Zurücksetzen</button></div>
+<div class="note"><strong>Ausgangsfarben:</strong><br>Vorne <code>#B65F4B</code><br>Seitlich <code>#D9BE87</code><br>Oben <code>#92969B</code></div>
+<hr class="separator"><h3 style="font-size:1rem">So verwendest du die Dateien</h3>
+<ol class="hint"><li>Wähle „Vorne“, „Seitlich“ oder „Oben“ und zeichne.</li><li>Speichere eine einzelne PNG-Datei oder lade alle drei gemeinsam als ZIP-Datei herunter. Jede PNG-Datei hat exakt 16 × 16 Pixel.</li><li>Für einen eigenen Minecraft-Block müssen die Dateien anschließend in ein passendes Ressourcenpaket oder Mod-Projekt eingebunden werden. Der PNG-Export allein fügt noch keinen neuen Block hinzu.</li></ol>
+<button id="resetAll">Alle drei Texturen auf Ausgangsfarben zurücksetzen</button>
+</section>
+</div></main>
+<script>
+'use strict';
+const S=16, colors={front:'#B65F4B',right:'#D9BE87',top:'#92969B'}, names={front:'vorne',right:'seitlich',top:'oben'};
+const texture=Object.fromEntries(Object.entries(colors).map(([key,c])=>[key,Array(S*S).fill(c)]));
+const history={front:[],right:[],top:[]};
+let side='front',tool='pen',chosen='#904638',painting=false,last=-1;
+const editor=document.getElementById('editor'),ctx=editor.getContext('2d'),status=document.getElementById('status');
+function message(s){status.textContent=s}
+function snap(){history[side].push(texture[side].slice());if(history[side].length>30)history[side].shift()}
+function darken(hex){const vals=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));return '#'+vals.map(v=>Math.round(v*.75).toString(16).padStart(2,'0')).join('').toUpperCase()}
+function redraw(){const pixels=texture[side],w=editor.width/S;ctx.clearRect(0,0,editor.width,editor.height);for(let y=0;y<S;y++)for(let x=0;x<S;x++){const col=pixels[y*S+x];if(col){ctx.fillStyle=col;ctx.fillRect(x*w,y*w,w,w)}else{ctx.fillStyle=(x+y)%2?'#e8e8e8':'white';ctx.fillRect(x*w,y*w,w,w)}}if(document.getElementById('grid').checked){ctx.strokeStyle='#263b4440';ctx.lineWidth=1;ctx.beginPath();for(let i=0;i<=S;i++){const v=i*w+.5;ctx.moveTo(v,0);ctx.lineTo(v,editor.height);ctx.moveTo(0,v);ctx.lineTo(editor.width,v)}ctx.stroke()}updatePreview()}
+function updatePreview(){document.querySelectorAll('[data-preview]').forEach(cv=>{const c=cv.getContext('2d');c.clearRect(0,0,S,S);texture[cv.dataset.preview].forEach((col,i)=>{if(col){c.fillStyle=col;c.fillRect(i%S,Math.floor(i/S),1,1)}})})}
+function setSide(value){side=value;document.querySelectorAll('[data-side]').forEach(b=>{const active=b.dataset.side===value;b.classList.toggle('active',active);b.setAttribute('aria-pressed',active)});document.getElementById('color').value=colors[value];setColor(colors[value]);redraw();message('Aktive Fläche: '+names[side])}
+function setTool(t){tool=t;document.querySelectorAll('[data-tool]').forEach(b=>{const active=b.dataset.tool===t;b.classList.toggle('active',active);b.setAttribute('aria-pressed',active)})}
+function setColor(col){chosen=col.toUpperCase();document.getElementById('color').value=chosen;document.getElementById('hex').value=chosen;document.getElementById('swatch').style.background=chosen}
+function indexAt(event){const r=editor.getBoundingClientRect(),x=Math.floor((event.clientX-r.left)/r.width*S),y=Math.floor((event.clientY-r.top)/r.height*S);if(x<0||y<0||x>=S||y>=S)return -1;return y*S+x}
+function flood(index,value){const arr=texture[side],old=arr[index];if(old===value)return;const q=[index];arr[index]=value;for(let p=0;p<q.length;p++){const i=q[p],x=i%S,y=Math.floor(i/S);const ns=[];if(x>0)ns.push(i-1);if(x<S-1)ns.push(i+1);if(y>0)ns.push(i-S);if(y<S-1)ns.push(i+S);for(const n of ns)if(arr[n]===old){arr[n]=value;q.push(n)}}}
+function apply(index){if(index<0||index===last)return;last=index;if(tool==='pick'){const col=texture[side][index];if(col)setColor(col);setTool('pen');painting=false;return}if(tool==='fill'){flood(index,chosen);painting=false}else texture[side][index]=tool==='erase'?null:chosen;redraw()}
+editor.addEventListener('pointerdown',e=>{const i=indexAt(e);if(i<0)return;e.preventDefault();snap();painting=true;last=-1;editor.setPointerCapture(e.pointerId);apply(i)});
+editor.addEventListener('pointermove',e=>{if(!painting||!(e.buttons&1)&&e.pointerType==='mouse')return;const i=indexAt(e);apply(i)});
+function stop(){painting=false;last=-1}editor.addEventListener('pointerup',stop);editor.addEventListener('pointercancel',stop);window.addEventListener('pointerup',stop);
+document.querySelectorAll('[data-side]').forEach(b=>b.onclick=()=>setSide(b.dataset.side));document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
+document.getElementById('color').oninput=e=>setColor(e.target.value);document.getElementById('hex').addEventListener('change',e=>{const s=e.target.value.trim();if(/^#[\da-f]{6}$/i.test(s))setColor(s);else{e.target.value=chosen;message('Bitte einen Farbcode wie #B65F4B eingeben.')}});
+document.getElementById('grid').onchange=redraw;
+document.getElementById('undo').onclick=()=>{if(history[side].length){texture[side]=history[side].pop();redraw();message('Letzten Schritt rückgängig gemacht.')}else message('Keine Änderung zum Rückgängigmachen vorhanden.')};
+document.getElementById('clear').onclick=()=>{snap();texture[side].fill(null);redraw();message('Fläche geleert.')};
+function stripe(vertical){snap();const base=colors[side],accent=darken(base),arr=texture[side];for(let y=0;y<S;y++)for(let x=0;x<S;x++){const stripe=vertical?(x%8===3||x%8===4):(y%8===3||y%8===4);arr[y*S+x]=stripe?accent:base}redraw();message('Streifenmuster gezeichnet.')}
+document.getElementById('stripesV').onclick=()=>stripe(true);document.getElementById('stripesH').onclick=()=>stripe(false);
+function png(sideName){const c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d');texture[sideName].forEach((color,i)=>{if(color){g.fillStyle=color;g.fillRect(i%S,Math.floor(i/S),1,1)}});return c.toDataURL('image/png')}
+function download(s){const a=document.createElement('a');a.href=png(s);a.download='minecraft_'+names[s]+'.png';document.body.append(a);a.click();a.remove()}
+document.getElementById('downloadOne').onclick=()=>{download(side);message('PNG gespeichert: '+names[side]+' (16 × 16 Pixel).')};
+// ZIP ohne externe Bibliothek: funktioniert auch beim Öffnen der HTML-Datei ohne Internet.
+const encoder=new TextEncoder();
+const crcTable=Uint32Array.from({length:256},(_,i)=>{let c=i;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);return c>>>0});
+function crc32(bytes){let crc=0xFFFFFFFF;for(const byte of bytes)crc=crcTable[(crc^byte)&255]^(crc>>>8);return (crc^0xFFFFFFFF)>>>0}
+function zipPngs(){
+  const parts=[],central=[];let offset=0;
+  for(const s of ['front','right','top']){
+    const name=encoder.encode('minecraft_'+names[s]+'.png');
+    const binary=atob(png(s).split(',')[1]);
+    const data=Uint8Array.from(binary,c=>c.charCodeAt(0));
+    const crc=crc32(data);
+    const head=new Uint8Array(30+name.length),h=new DataView(head.buffer);
+    h.setUint32(0,0x04034B50,true);h.setUint16(4,20,true);h.setUint16(8,0,true); // PNG unverändert speichern
+    h.setUint32(14,crc,true);h.setUint32(18,data.length,true);h.setUint32(22,data.length,true);h.setUint16(26,name.length,true);
+    head.set(name,30);parts.push(head,data);
+    const entry=new Uint8Array(46+name.length),e=new DataView(entry.buffer);
+    e.setUint32(0,0x02014B50,true);e.setUint16(4,20,true);e.setUint16(6,20,true);
+    e.setUint32(16,crc,true);e.setUint32(20,data.length,true);e.setUint32(24,data.length,true);
+    e.setUint16(28,name.length,true);e.setUint32(42,offset,true);entry.set(name,46);central.push(entry);
+    offset+=head.length+data.length;
+  }
+  const centralLength=central.reduce((sum,e)=>sum+e.length,0);
+  const end=new Uint8Array(22),v=new DataView(end.buffer);
+  v.setUint32(0,0x06054B50,true);v.setUint16(8,central.length,true);v.setUint16(10,central.length,true);
+  v.setUint32(12,centralLength,true);v.setUint32(16,offset,true);
+  return new Blob([...parts,...central,end],{type:'application/zip'});
+}
+document.getElementById('downloadAll').onclick=()=>{
+  try{
+    const url=URL.createObjectURL(zipPngs());const a=document.createElement('a');
+    a.href=url;a.download='minecraft_texturen.zip';document.body.append(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),60000);
+    message('ZIP-Datei erstellt: vorne, seitlich und oben – jeweils 16 × 16 Pixel.');
+  }catch(error){console.error(error);message('ZIP konnte nicht erstellt werden. Bitte die Texturen einzeln speichern.')}
+};
+const rot=document.getElementById('rotate');rot.oninput=()=>{document.getElementById('scene').style.transform=`rotateX(-25deg) rotateY(${rot.value}deg)`};document.getElementById('resetRotation').onclick=()=>{rot.value=-35;rot.oninput()};
+document.getElementById('resetAll').onclick=()=>{if(!confirm('Wirklich alle drei Texturen zurücksetzen?'))return;for(const s of Object.keys(colors)){history[s].push(texture[s].slice());texture[s].fill(colors[s])}setSide('front');message('Alle drei Texturen zurückgesetzt.')};
+setSide('front');
+</script>
+</body></html>
