@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arbeiten mit der Befehlszeile – Minecraft</title><link rel="stylesheet" href="style.css">
+<style>
+.lesson{border:1px solid #c8d6dc;border-radius:12px;padding:1rem;margin:1.1rem 0}
+.note{background:#edf5f9;border-left:5px solid #287895;padding:1rem;margin:1rem 0}
+.warning{background:#fff4e4;border-left:5px solid #be7925;padding:1rem}
+pre{background:#172b38;color:#f6f9fc;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+code{overflow-wrap:anywhere}kbd{display:inline-block;border:1px solid #aab8c3;border-bottom-width:3px;border-radius:5px;padding:.1rem .35rem;background:#f5f7fa;color:#152632}
+table{width:100%;border-collapse:collapse}td,th{border:1px solid #c9d4dc;padding:.55rem;text-align:left}
+.quiz-question{border:1px solid #bccbd5;border-radius:12px;padding:1rem;margin:1rem 0}
+.quiz-options{display:grid;gap:.45rem;margin:.75rem 0}.quiz-options label{display:block;padding:.6rem;border:1px solid #bfccd3;border-radius:7px;cursor:pointer}
+.quiz-options label:has(input:checked){background:#e4f2fa;border-color:#26749b}
+.feedback{font-weight:600}.correct{color:#126e38}.incorrect{color:#9c3434}
+button{padding:.7rem 1rem;border:0;border-radius:8px;background:#226985;color:white;cursor:pointer;font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e2a742}
+.small{font-size:.92rem}.quiz-panel{border:2px solid #3b7e92;border-radius:14px;padding:1rem}
+@media(max-width:620px){.quiz-panel{padding:.7rem}}
+</style></head>
+<body><header><h1>Minecraft – Arbeiten mit der Befehlszeile</h1><p>Schneller tippen · Befehle verstehen · Fehler beheben</p></header>
+<main><p><a href="index.html">← Zur Minecraft-Übersicht</a></p>
+<section><h2>Wozu brauchen wir die Befehlszeile?</h2><p>Mit Befehlen verändern wir die Spielwelt, testen Schaltungen und bereiten unsere Befehlsblöcke und Datapacks vor. Du musst dabei nicht jedes Mal einen langen Befehl neu schreiben!</p>
+<p class="note"><strong>Vorbereitung:</strong> Minecraft Java Edition am Windows-PC, eigene Testwelt und erlaubte Befehle. Zum Testen von Spielmodus-, Block- und Scoreboard-Befehlen brauchst du die passenden Berechtigungen (Cheats). Die Beispiele beziehen sich auf unsere Java-Testumgebung.</p></section>
+<section><h2>1. Chat und Befehlszeile öffnen</h2><table><thead><tr><th>Taste</th><th>Wirkung</th></tr></thead><tbody>
+<tr><td><kbd>T</kbd></td><td>Chat öffnen; für Befehle anschließend <code>/</code> tippen</td></tr>
+<tr><td><kbd>/</kbd></td><td>Chat bereits mit <code>/</code> öffnen</td></tr>
+<tr><td><kbd>Enter</kbd></td><td>Befehl absenden</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Eingabe verlassen, ohne den Befehl auszuführen</td></tr></tbody></table>
+<p><strong>Erster Test:</strong> Drücke <kbd>/</kbd>, schreibe <code>say Hallo, Young Engineers!</code> und drücke <kbd>Enter</kbd>.</p>
+<pre>/say Hallo, Young Engineers!</pre></section>
+<section><h2>2. Mit Tab automatisch ergänzen</h2><p>Während du einen Befehl eingibst, bietet Minecraft passende Befehle und Argumente an. Mit <kbd>Tab</kbd> kannst du Vorschläge übernehmen bzw. durchgehen. Achte auf die eingeblendeten Hinweise.</p>
+<article class="lesson"><h3>Versuch A – Den Befehlsnamen ergänzen</h3><ol><li>Öffne die Befehlszeile mit <kbd>/</kbd>.</li><li>Tippe <code>time</code> und beobachte die Vorschläge.</li><li>Ergänze mithilfe von <kbd>Tab</kbd> und der Vorschlagsliste den Befehl <code>/time set day</code>.</li><li>Führe ihn aus und beobachte die Welt.</li></ol><pre>/time set day</pre></article>
+<article class="lesson"><h3>Versuch B – Vorschläge als Hilfe</h3><p>Schreibe <code>/gamemode </code> einschließlich des Leerzeichens. Minecraft zeigt dir mögliche Spielmodi. Probiere anschließend:</p><pre>/gamemode creative</pre><p class="small">Nicht alle Vorschläge lassen sich durch ein einziges Tab vollständig einsetzen: Welche Vorschläge erscheinen, hängt von der aktuellen Eingabeposition ab.</p></article></section>
+<section><h2>3. Letzte Befehle wiederverwenden</h2><table><thead><tr><th>Taste</th><th>Wirkung</th></tr></thead><tbody>
+<tr><td><kbd>↑</kbd></td><td>Vorherige Eingabe aus dem Verlauf aufrufen</td></tr><tr><td><kbd>↓</kbd></td><td>Wieder zu neueren Eingaben wechseln</td></tr>
+<tr><td><kbd>←</kbd> / <kbd>→</kbd></td><td>Schreibposition verschieben</td></tr>
+<tr><td><kbd>Pos1</kbd> / <kbd>Ende</kbd></td><td>Zum Anfang oder Ende der Eingabe springen</td></tr>
+<tr><td><kbd>Strg</kbd> + <kbd>←</kbd> / <kbd>→</kbd></td><td>Wortweise navigieren</td></tr></tbody></table>
+<article class="lesson"><h3>Versuch – Unser Zahlenschloss-Profi</h3><p>Voraussetzung: Das Scoreboard-Ziel <code>young_code</code> ist bereits angelegt. Sonst zuerst einmal ausführen:</p><pre>/scoreboard objectives add young_code dummy</pre>
+<p>Gib diesen Befehl ein:</p><pre>/scoreboard players set #s1 young_code 1</pre>
+<p>Rufe ihn mit <kbd>↑</kbd> wieder auf und ändere nur Schalternummer und Wert. So entstehen die nächsten drei Befehle:</p><pre>/scoreboard players set #s2 young_code 0
+/scoreboard players set #s3 young_code 0
+/scoreboard players set #s4 young_code 1</pre>
+<p><strong>Kontrolle:</strong> <code>/scoreboard players list #s4</code> zeigt unter anderem den gespeicherten Wert dieses Schalters.</p></article></section>
+<section><h2>4. Kopieren, Einfügen und Löschen</h2><table><thead><tr><th>Taste</th><th>Wirkung</th></tr></thead><tbody>
+<tr><td><kbd>Strg</kbd> + <kbd>A</kbd></td><td>Ganze Zeile markieren</td></tr><tr><td><kbd>Strg</kbd> + <kbd>C</kbd></td><td>Markierung kopieren</td></tr><tr><td><kbd>Strg</kbd> + <kbd>V</kbd></td><td>Einfügen</td></tr><tr><td><kbd>Strg</kbd> + <kbd>X</kbd></td><td>Markierung ausschneiden</td></tr>
+<tr><td><kbd>Rücktaste</kbd></td><td>Zeichen links löschen</td></tr><tr><td><kbd>Entf</kbd></td><td>Zeichen rechts löschen</td></tr><tr><td><kbd>Strg</kbd> + <kbd>Rücktaste</kbd></td><td>Wort links löschen</td></tr></tbody></table>
+<p class="note">Tastenkürzel können sich je nach Minecraft-Version, Texteingabefeld und Betriebssystem unterscheiden. Probiere sie deshalb zuerst in einer ungefährlichen Chat-Nachricht aus. Manche Editierfunktionen, etwa Rückgängig, stehen nicht in jedem Eingabefeld zur Verfügung.</p></section>
+<section><h2>5. Spitze und eckige Klammern – der Unterschied</h2><table><thead><tr><th>Schreibweise</th><th>Bedeutung</th><th>Mit eintippen?</th></tr></thead><tbody>
+<tr><td><code>&lt;Spielmodus&gt;</code></td><td>Pflichtangabe in einer Syntaxbeschreibung</td><td>Nein, durch einen Wert ersetzen</td></tr>
+<tr><td><code>[Ziel]</code></td><td>Optionale Angabe in einer Syntaxbeschreibung</td><td>Nein, Angabe einsetzen oder weglassen</td></tr>
+<tr><td><code>@a[gamemode=creative]</code></td><td>Filter innerhalb eines echten Selektors</td><td><strong>Ja!</strong></td></tr>
+<tr><td><code>&lt;clear|rain|thunder&gt;</code></td><td>Eine der Alternativen wählen</td><td>Weder Klammern noch Trennstriche</td></tr></tbody></table>
+<article class="lesson"><h3>Pflicht und freiwillige Angabe</h3><p>Die Dokumentation kann die Form <code>/gamemode &lt;Spielmodus&gt; [Ziel]</code> anzeigen. Echte Befehle sind:</p><pre>/gamemode creative
+/gamemode survival @p</pre>
+<p><strong>Achtung:</strong> In Minecraft sind eckige Klammern nicht generell überflüssig! Bei Selektorfiltern gehören sie wirklich dazu:</p><pre>/give @a[gamemode=creative] minecraft:stone</pre></article>
+<article class="lesson"><h3>Weitere Zeichen</h3><p>Der senkrechte Strich <code>|</code> bedeutet in vielen Syntaxbeschreibungen „oder“. Drei Punkte <code>...</code> können auf weitere oder wiederholbare Angaben hinweisen. Entscheidend ist immer, ob du eine <em>Beschreibung</em> oder einen <em>echten Befehl</em> vor dir hast.</p></article></section>
+<section><h2>6. Häufige Fehler erkennen</h2><div class="lesson"><h3>Der Befehl wird rot markiert</h3><p>Kontrolliere die eingeblendeten Vorschläge: Fehlt ein Argument? Ist ein Name falsch geschrieben? Gibt es die Funktion oder das Scoreboard-Ziel überhaupt?</p>
+<pre>/scoreboard players set #s1 young_code</pre><p>Hier fehlt der Zahlenwert am Ende. Richtig zum Beispiel:</p><pre>/scoreboard players set #s1 young_code 1</pre></div>
+<div class="lesson"><h3>Befehl erlaubt, aber keine Wirkung</h3><p>Prüfe Berechtigungen, Zielauswahl und Bedingungen. Ein Befehl kann syntaktisch richtig sein, aber kein passendes Ziel finden. Tipp: Mit <code>/help</code> oder <code>/help scoreboard</code> kannst du zusätzliche Hilfestellung aufrufen.</p></div></section>
+<section><h2>7. Chat, Befehlsblock und Datapack unterscheiden</h2><table><thead><tr><th>Ort</th><th>Schreibweise</th></tr></thead><tbody><tr><td>Chat</td><td><code>/say Hallo!</code></td></tr><tr><td>Eingabefeld eines Befehlsblocks</td><td><code>say Hallo!</code></td></tr><tr><td>Zeile einer <code>.mcfunction</code>-Datei</td><td><code>say Hallo!</code></td></tr></tbody></table>
+<p>Im Chat brauchst du den führenden Schrägstrich. In unseren Befehlsblöcken und Funktionsdateien schreiben wir den Befehl ohne diesen Schrägstrich. Eine <code>.mcfunction</code>-Datei kann mehrere Befehle enthalten – einen pro Zeile.</p>
+<p>Weiterlernen: <a href="befehlsbloecke.html">Befehlsblöcke</a> · <a href="datapacks.html">Eigene Datapacks</a> · <a href="datapacks/zahlenschloss-profi.html">Zahlenschloss-Profi</a>.</p></section>
+<section><h2>8. Quiz – Bist du fit an der Befehlszeile?</h2><p>15 abwechslungsreiche Fragen in drei Schwierigkeitsstufen. Wähle pro Frage eine Antwort. Das Quiz wertet deine Antworten aus, erklärt Fehler und lässt sich beliebig wiederholen. Es funktioniert ohne Internetverbindung.</p>
+<div class="quiz-panel"><p id="quiz-progress" aria-live="polite"></p><div id="quiz-questions"></div><button type="button" id="check-quiz">Antworten auswerten</button> <button type="button" id="reset-quiz">Neu beginnen</button><div id="quiz-result" aria-live="polite"></div></div>
+<noscript><p class="warning">Für das interaktive Quiz muss JavaScript im Browser eingeschaltet sein.</p></noscript></section>
+<section><h2>9. Abschluss-Challenge</h2><p>Erstelle im <strong>Zahlenschloss-Profi</strong> vier Scoreboard-Einträge mit dem Code <code>1001</code>. Nutze dazu einen einzigen vollständig getippten Befehl und danach dreimal den Befehlsverlauf. Anschließend zeige den Wert von <code>#s4</code> an. Wer schafft das mit den wenigsten Tastendrücken?</p></section>
+</main><footer>AG Young Engineers · Martin-Rinckart-Gymnasium Eilenburg · Unterrichtsentwurf zur praktischen Prüfung</footer>
+<script>
+const questions=[
+["Grundlagen","Welche Taste öffnet direkt die Minecraft-Befehlszeile?","/",["T","/","F3","Esc"],1,"Mit / öffnest du den Chat mit bereits eingefügtem Schrägstrich."],
+["Grundlagen","Welche Taste ruft den vorherigen Befehl aus dem Verlauf ab?","Verlauf",["Tab","↓","↑","Strg + V"],2,"Pfeil nach oben holt ältere Eingaben zurück."],
+["Grundlagen","Wozu dient Tab während der Eingabe?","Vorschläge",["Screenshot erstellen","Befehl sofort ausführen","Chat schließen","Vorschläge ergänzen"],3,"Tab hilft bei der Vervollständigung."],
+["Grundlagen","Was bewirkt Strg + A im Eingabefeld?","Bearbeiten",["Alles markieren","Alles ausführen","Alles löschen","Letzte Eingabe laden"],0,"Strg + A markiert den Text, löscht ihn aber nicht."],
+["Grundlagen","Welche Taste beendet die Eingabe normalerweise ohne Ausführung?","Abbrechen",["Enter","Tab","Esc","Pos1"],2,"Esc schließt die Eingabe, ohne sie abzusenden."],
+["Anwendung","Was bedeutet &lt;Spielmodus&gt; in einer Syntaxbeschreibung?","Pflichtangabe",["Text mit spitzen Klammern eingeben","Spielmodus muss ersetzt werden","Argument ist freiwillig","Spielmodus wird ignoriert"],1,"Spitze Klammern stehen in der Beschreibung für ein benötigtes Argument."],
+["Anwendung","Was bedeutet [Ziel] in einer Syntaxbeschreibung?","Option",["Ziel ist optional","Ziel muss mit Klammern eingegeben werden","Ziel ist ein Fehler","Befehl ist unvollständig"],0,"Die eckigen Klammern der Beschreibung kennzeichnen ein optionales Argument."],
+["Anwendung","Was gilt bei @a[gamemode=creative]?","Selektoren",["Eckige Klammern entfallen","@a darf nicht verwendet werden","Die Klammern gehören zum Befehl","creative muss in spitze Klammern"],2,"Selektorfilter benutzen tatsächliche eckige Klammern."],
+["Anwendung","Wie wird der Befehl aus der Chatzeile in eine .mcfunction-Datei übernommen?","Dateien",["Mit zwei Schrägstrichen","Ohne führenden Schrägstrich","Mit zusätzlichen eckigen Klammern","Nur in Großbuchstaben"],1,"Funktionsdateien enthalten Befehle ohne führendes /."],
+["Anwendung","Welche Eingabe folgt auf /scoreboard players set #s1 young_code, um den Wert 1 zu setzen?","Argumente",["run","dummy","1","@p"],2,"Der set-Befehl benötigt nach Ziel und Scoreboard-Ziel einen Zahlenwert."],
+["Profi","Wie änderst du #s1 am schnellsten zu #s2 im letzten Befehl?","Bearbeitung",["Alles neu schreiben","Verlauf ↑ und Text anpassen","Spiel neu starten","Datapack neu laden"],1,"Nutze den Befehlsverlauf und bearbeite nur die nötigen Zeichen."],
+["Profi","Welcher echte Minecraft-Befehl entspricht /gamemode &lt;Spielmodus&gt; [Ziel]?","Syntax",["/gamemode &lt;creative&gt;","/gamemode [creative]","/gamemode creative @p","/gamemode &lt;creative&gt; [@p]"],2,"Klammern der Syntaxbeschreibung werden nicht übernommen."],
+["Profi","Was bedeutet die Schreibweise &lt;clear|rain|thunder&gt; in einer Anleitung?","Alternativen",["Alle drei Wörter gemeinsam schreiben","Genau eine der Alternativen wählen","Die Trennstriche eingeben","Das gesamte Argument weglassen"],1,"Der senkrechte Strich trennt Alternativen."],
+["Profi","Welche erste Kontrolle ist sinnvoll, wenn ein Befehl rot markiert wird?","Fehler",["Minecraft neu installieren","Tastenbelegung löschen","Vorschläge und Argumente prüfen","Befehlsblock zerstören"],2,"Häufig fehlen Argumente oder Bezeichner sind falsch."],
+["Profi","Welche Eingabe prüft den Scoreboard-Eintrag #s4?","Scoreboard",["/scoreboard players list #s4","/scoreboard objectives add #s4","/scoreboard players set #s4","/scoreboard list young_code"],0,"players list mit dem Namen zeigt dessen Scoreboard-Einträge."]
+];
+const host=document.getElementById('quiz-questions');
+function render(){host.innerHTML='';questions.forEach((q,i)=>{const d=document.createElement('fieldset');d.className='quiz-question';const legend=document.createElement('legend');legend.textContent=(i+1)+'. '+q[1].replace(/&lt;/g,'<').replace(/&gt;/g,'>');d.append(legend);const badge=document.createElement('p');badge.className='small';badge.textContent=q[0]+' · '+q[2];d.append(badge);const options=document.createElement('div');options.className='quiz-options';q[3].forEach((answer,j)=>{let lab=document.createElement('label'), inp=document.createElement('input');inp.type='radio';inp.name='q'+i;inp.value=j;inp.addEventListener('change',progress);lab.append(inp,document.createTextNode(' '+answer));options.append(lab)});d.append(options);const fb=document.createElement('p');fb.id='feedback-'+i;fb.className='feedback';d.append(fb);host.append(d)});progress()}
+function progress(){let done=questions.filter((_,i)=>document.querySelector('input[name="q'+i+'"]:checked')).length;document.getElementById('quiz-progress').textContent='Beantwortet: '+done+' von '+questions.length}
+document.getElementById('check-quiz').addEventListener('click',()=>{let count=0,done=0;questions.forEach((q,i)=>{const chosen=document.querySelector('input[name="q'+i+'"]:checked'), fb=document.getElementById('feedback-'+i);if(chosen){done++;if(Number(chosen.value)===q[4]){count++;fb.textContent='✓ Richtig! '+q[5];fb.className='feedback correct'}else{fb.textContent='✗ Noch nicht richtig. '+q[5]+' Richtige Antwort: '+q[3][q[4]];fb.className='feedback incorrect'}}else{fb.textContent='Noch keine Antwort ausgewählt.';fb.className='feedback'}});const r=document.getElementById('quiz-result');r.innerHTML='<h3>Ergebnis: '+count+' von '+questions.length+' Punkten</h3><p>'+(done<questions.length?'Du hast '+(questions.length-done)+' Fragen ausgelassen. ': '')+(count===15?'Ausgezeichnet!':count>=11?'Gut gemacht! Übe die übrigen Fragen noch einmal.':'Sieh dir die Erklärungen an und versuche es erneut.')+'</p>';r.scrollIntoView({behavior:'smooth',block:'nearest'})});
+document.getElementById('reset-quiz').addEventListener('click',()=>{render();document.getElementById('quiz-result').textContent='';window.scrollTo({top:document.getElementById('quiz-progress').getBoundingClientRect().top+window.scrollY-20,behavior:'smooth'})});
+render();
+</script></body></html>
