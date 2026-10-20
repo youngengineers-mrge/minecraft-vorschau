@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Befehlsblöcke – Minecraft Lernweg</title><link rel="stylesheet" href="style.css">
+<style>.lesson{margin:1.2rem 0;padding:1rem;border:1px solid #cbd5dc;border-radius:10px}.lesson h3{margin-top:0}pre{overflow:auto;padding:12px;background:#152331;color:#f5f7fb;border-radius:6px}code{overflow-wrap:anywhere}.note{border-left:4px solid #357b91;padding:.6rem 1rem;background:#eef5f7}.mini{color:#405668}</style></head>
+<body><header><h1>Minecraft – Befehlsblöcke</h1><p>Ein Block, der Befehle ausführt · Einstieg für die Minecraft-AG</p></header>
+<main><p><a href="index.html">← Zur Minecraft-Übersicht</a></p>
+<section><h2>Was ist ein Befehlsblock?</h2>
+<p>Ein Befehlsblock speichert einen Minecraft-Befehl. Er kann ihn durch ein Redstone-Signal, automatisch immer wieder oder als Teil einer Befehlskette ausführen. So verbinden wir Redstone mit Programmierung – ohne gleich ein Datapack erstellen zu müssen.</p>
+<p class="note"><strong>Vorbereitung:</strong> Minecraft Java, eigene Testwelt, Kreativmodus, Cheats/Befehle aktiviert und ausreichende Berechtigung. Auf einem Mehrspieler-Server müssen Befehlsblöcke zusätzlich serverseitig erlaubt sein. Befehlsblöcke sind nicht für unkontrollierte Wiederholungen gedacht.</p>
+<h2>Teil 1 – Befehlsblock erhalten (5 Minuten)</h2>
+<ol><li>Öffne deine Testwelt im Kreativmodus.</li><li>Öffne mit <kbd>T</kbd> den Chat.</li><li>Gib den folgenden Befehl ein und drücke die Eingabetaste:</li></ol>
+<pre>/give @s minecraft:command_block</pre>
+<p>Der Befehlsblock erscheint im Inventar. Setze ihn auf eine freie Fläche. Öffne ihn mit der rechten Maustaste.</p>
+<p class="mini">Merke: Im Chat beginnen Befehle mit <code>/</code>. Im Eingabefeld des Befehlsblocks schreiben wir sie hier ohne <code>/</code>.</p></section>
+<section><h2>Fünf Experimente</h2>
+<article class="lesson"><h3>1. Der sprechende Block – Impuls</h3>
+<ol><li>Öffne den Befehlsblock.</li><li>Wähle <strong>Impuls</strong>, <strong>Unbedingt</strong> und <strong>Benötigt Redstone</strong>.</li><li>Trage als Befehl ein:</li></ol>
+<pre>say Hallo, Young Engineers!</pre>
+<ol start="4"><li>Bestätige mit <strong>Fertig</strong>.</li><li>Setze einen Knopf an den Befehlsblock und drücke ihn.</li></ol>
+<p><strong>Beobachtung:</strong> Die Nachricht erscheint im Chat. Bei jedem Knopfdruck wird der Befehl erneut ausgeführt.</p>
+<p><strong>Deine Aufgabe:</strong> Ändere den Nachrichtentext.</p></article>
+<article class="lesson"><h3>2. Ein Block verändert die Welt – Impuls</h3>
+<p>Baue einen zweiten Impuls-Befehlsblock mit Knopf. Verwende:</p>
+<pre>setblock ~ ~1 ~ minecraft:gold_block</pre>
+<p><strong>Beobachtung:</strong> Direkt über dem Befehlsblock erscheint ein Goldblock. Die Zeichen <code>~ ~1 ~</code> geben relative Koordinaten an: gleiche X- und Z-Position, eine Blockhöhe darüber.</p>
+<p><strong>Aufgabe:</strong> Ersetze <code>gold_block</code> durch <code>emerald_block</code> und teste erneut.</p></article>
+<article class="lesson"><h3>3. Ein wiederholter Befehl – Wiederholen</h3>
+<p>Baue einen neuen Befehlsblock. Stelle ihn auf <strong>Wiederholen</strong> und <strong>Benötigt Redstone</strong>. Setze einen Hebel daran und trage ein:</p>
+<pre>effect give @a[distance=..3] minecraft:glowing 2 0 true</pre>
+<p><strong>Beobachtung:</strong> Solange der Hebel eingeschaltet ist, erhalten Spieler in einem Abstand von höchstens drei Blöcken immer wieder den Leuchteffekt. Nach dem Ausschalten endet die Erneuerung des Effekts.</p>
+<p><strong>Achtung:</strong> Starte wiederholende Befehlsblöcke grundsätzlich zunächst mit Hebel statt mit <em>Immer aktiv</em>.</p></article>
+<article class="lesson"><h3>4. Zwei Befehle hintereinander – Kette</h3>
+<p>Setze einen <strong>Impuls</strong>-Befehlsblock mit Knopf. Sein Befehl:</p><pre>say Schritt 1</pre>
+<p>Platziere direkt daran einen zweiten Befehlsblock <strong>in Pfeilrichtung des ersten Blocks</strong>. Stelle ihn auf <strong>Kette</strong>, <strong>Unbedingt</strong> und <strong>Immer aktiv</strong>. Sein Befehl:</p><pre>say Schritt 2</pre>
+<p><strong>Beobachtung:</strong> Nach einem Knopfdruck erscheinen beide Meldungen in der Reihenfolge 1, 2. Die Ausrichtung des Pfeils ist wichtig.</p></article>
+<article class="lesson"><h3>5. Mini-Projekt: Eine Tür per Knopfdruck öffnen</h3>
+<p>Baue zunächst einen Durchgang in einer Wand. Markiere den einzelnen Block, der geschlossen sein soll. Ein Impuls-Befehlsblock mit Knopf setzt an der gewünschten Stelle einen passenden Block; ein zweiter Knopf entfernt ihn wieder.</p>
+<p>Schau auf den Zielblock und bestimme seine Koordinaten mit <kbd>F3</kbd>. Ersetze <code>X Y Z</code> in beiden Befehlen durch diese ganzzahligen Blockkoordinaten.</p>
+<p><strong>Knopf „Schließen“:</strong></p><pre>setblock X Y Z minecraft:iron_block</pre>
+<p><strong>Knopf „Öffnen“:</strong></p><pre>setblock X Y Z minecraft:air</pre>
+<p><strong>Wichtig:</strong> Dies ist eine einfache Ein-Block-Sperre und noch keine richtige Eisentür. Wir nutzen sie zunächst, um den Befehl <code>setblock</code> zu verstehen.</p>
+<p><strong>Profi-Aufgabe:</strong> Erweitere den Durchgang auf zwei Blöcke Höhe und überlege, wie beide Blöcke mit einem einzigen Befehl geändert werden können. Tipp: <code>fill</code>.</p></article>
+</section>
+<section><h2>Die drei Arten von Befehlsblöcken</h2>
+<table><thead><tr><th>Art</th><th>Wirkung</th><th>Typischer Einsatz</th></tr></thead><tbody>
+<tr><td><strong>Impuls</strong> (orange)</td><td>Einmal pro Auslösung</td><td>Knopf, Taster</td></tr>
+<tr><td><strong>Wiederholen</strong> (lila)</td><td>Wiederholt ausführen, solange aktiviert</td><td>Überwachung</td></tr>
+<tr><td><strong>Kette</strong> (grün)</td><td>Nach einem vorherigen Befehlsblock</td><td>Mehrere Schritte</td></tr>
+</tbody></table>
+<p><strong>Weitere Einstellungen:</strong> <em>Benötigt Redstone</em> oder <em>Immer aktiv</em> bestimmen die Aktivierung. <em>Bedingt</em> oder <em>Unbedingt</em> bestimmen, ob der Erfolg eines vorangehenden Befehlsblocks vorausgesetzt wird.</p></section>
+<section><h2>Kontrollfragen</h2><ol>
+<li>Warum benötigt der erste Befehlsblock einen Knopf?</li>
+<li>Wofür stehen die drei Tilden in <code>~ ~1 ~</code>?</li>
+<li>Wie kannst du einen sich wiederholenden Befehl zuverlässig stoppen?</li>
+<li>Warum spielt bei Ketten-Befehlsblöcken die Pfeilrichtung eine Rolle?</li>
+<li>Welchen Vorteil hat später eine <a href="datapacks.html">Datapack-Funktion</a> gegenüber einer langen Kette aus Befehlsblöcken?</li></ol>
+<p><strong>Nächster Lernschritt:</strong> Eine Tür mit Countdown und automatischem Schließen. Danach verbinden wir Befehlsblöcke mit unserem <a href="datapacks.html#zahlenschloss-profi">Zahlenschloss-Profi</a>.</p></section>
+</main><footer>AG Young Engineers · Martin-Rinckart-Gymnasium Eilenburg · Unterrichtsentwurf zur praktischen Prüfung</footer></body></html>
