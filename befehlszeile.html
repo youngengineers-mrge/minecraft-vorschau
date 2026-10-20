@@ -23,10 +23,11 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e2a7
 <p class="note"><strong>Vorbereitung:</strong> Minecraft Java Edition am Windows-PC, eigene Testwelt und erlaubte Befehle. Zum Testen von Spielmodus-, Block- und Scoreboard-Befehlen brauchst du die passenden Berechtigungen (Cheats). Die Beispiele beziehen sich auf unsere Java-Testumgebung.</p></section>
 <section><h2>1. Chat und Befehlszeile öffnen</h2><table><thead><tr><th>Taste</th><th>Wirkung</th></tr></thead><tbody>
 <tr><td><kbd>T</kbd></td><td>Chat öffnen; für Befehle anschließend <code>/</code> tippen</td></tr>
-<tr><td><kbd>/</kbd></td><td>Chat bereits mit <code>/</code> öffnen</td></tr>
+<tr><td><kbd>-</kbd></td><td>Auf unseren deutschen Tastaturen: Befehlszeile direkt öffnen (mit vorangestelltem <code>/</code>)</td></tr>
 <tr><td><kbd>Enter</kbd></td><td>Befehl absenden</td></tr>
 <tr><td><kbd>Esc</kbd></td><td>Eingabe verlassen, ohne den Befehl auszuführen</td></tr></tbody></table>
-<p><strong>Erster Test:</strong> Drücke <kbd>/</kbd>, schreibe <code>say Hallo, Young Engineers!</code> und drücke <kbd>Enter</kbd>.</p>
+<p class="note"><strong>Tastaturhinweis:</strong> Auf unseren deutschen Tastaturen öffnet die Taste <kbd>-</kbd> die Befehlszeile. In englischen Anleitungen steht dafür häufig <kbd>/</kbd>. Das Zeichen am Anfang eines Minecraft-Befehls bleibt <code>/</code> (Schrägstrich). Die tatsächliche Tastenbelegung kann unter <em>Optionen → Steuerung → Tastenbelegung</em> kontrolliert und angepasst werden.</p>
+<p><strong>Erster Test:</strong> Drücke <kbd>-</kbd>, schreibe <code>say Hallo, Young Engineers!</code> und drücke <kbd>Enter</kbd>.</p>
 <pre>/say Hallo, Young Engineers!</pre></section>
 <section><h2>2. Mit Tab automatisch ergänzen</h2><p>Während du einen Befehl eingibst, bietet Minecraft passende Befehle und Argumente an. Mit <kbd>Tab</kbd> kannst du Vorschläge übernehmen bzw. durchgehen. Achte auf die eingeblendeten Hinweise.</p>
 <article class="lesson"><h3>Versuch A – Den Befehlsnamen ergänzen</h3><ol><li>Öffne die Befehlszeile mit <kbd>/</kbd>.</li><li>Tippe <code>time</code> und beobachte die Vorschläge.</li><li>Ergänze mithilfe von <kbd>Tab</kbd> und der Vorschlagsliste den Befehl <code>/time set day</code>.</li><li>Führe ihn aus und beobachte die Welt.</li></ol><pre>/time set day</pre></article>
@@ -69,7 +70,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e2a7
 </main><footer>AG Young Engineers · Martin-Rinckart-Gymnasium Eilenburg · Unterrichtsentwurf zur praktischen Prüfung</footer>
 <script>
 const questions=[
-["Grundlagen","Welche Taste öffnet direkt die Minecraft-Befehlszeile?","/",["T","/","F3","Esc"],1,"Mit / öffnest du den Chat mit bereits eingefügtem Schrägstrich."],
+["Grundlagen","Welche Taste öffnet auf unseren deutschen Schul-Tastaturen direkt die Minecraft-Befehlszeile?","Deutsche Tastatur",["T","-","F3","Esc"],1,"Auf unseren deutschen Tastaturen öffnet die Minus-Taste die Befehlszeile. Der Befehl selbst beginnt trotzdem mit /. Die Belegung kann in den Steuerungseinstellungen abweichen."],
 ["Grundlagen","Welche Taste ruft den vorherigen Befehl aus dem Verlauf ab?","Verlauf",["Tab","↓","↑","Strg + V"],2,"Pfeil nach oben holt ältere Eingaben zurück."],
 ["Grundlagen","Wozu dient Tab während der Eingabe?","Vorschläge",["Screenshot erstellen","Befehl sofort ausführen","Chat schließen","Vorschläge ergänzen"],3,"Tab hilft bei der Vervollständigung."],
 ["Grundlagen","Was bewirkt Strg + A im Eingabefeld?","Bearbeiten",["Alles markieren","Alles ausführen","Alles löschen","Letzte Eingabe laden"],0,"Strg + A markiert den Text, löscht ihn aber nicht."],
